@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>喉発音表記ツール</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    input, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    #output {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      background: #fff;
+      padding: 1rem;
+      border: 1px solid #ccc;
+    }
+    em {
+      font-style: italic; /* 無振動音 */
+    }
+  </style>
+</head>
+<body>
+  <h1>喉発音表記ツール</h1>
+  <p>
+    英単語を入力すると、CVC構造＋喉発音記号の形式で出力します。
+  </p>
+  <input type="text" id="input" placeholder="単語を入力...">
+  <button onclick="convert()">変換</button>
+  <div id="output"></div>
+
+  <script>
+    // 簡易サンプル辞書（今後ここを拡張）
+    const throatDict = {
+      "fever": "<em>F</em>-I̲̲-V / V-E̲-R",
+      "don't": "D-O-<em>NT</em>",
+      "help": "<em>H</em>-E-LP",
+      "speaking": "SP-I-K / K-I-NG"
+    };
+
+    function convert() {
+      const word = document.getElementById("input").value.toLowerCase();
+      const result = throatDict[word] || "データが見つかりません。";
+      document.getElementById("output").innerHTML = `<strong>${word}</strong><br>${result}`;
+    }
+  </script>
+</body>
+</html>
