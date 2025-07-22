@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Syllable Splitter</title>
+</head>
+<body>
+  <h1>英語の音節分解サイト</h1>
+  <input type="text" id="input" placeholder="Type a word..." />
+  <button onclick="split()">音節に分解</button>
+  <p id="result"></p>
+
+  <script>
+    function splitSyllables(word) {
+      // 超簡易：母音前後で区切る（本格精度には改良必要）
+      const vowels = 'aeiouy';
+      let result = [];
+      let syllable = '';
+
+      for (let i = 0; i < word.length; i++) {
+        syllable += word[i];
+        if (vowels.includes(word[i].toLowerCase()) && syllable.length > 1) {
+          result.push(syllable);
+          syllable = '';
+        }
+      }
+      if (syllable) result.push(syllable);
+      return result.join(' / ');
+    }
+
+    function split() {
+      const input = document.getElementById('input').value;
+      const result = splitSyllables(input);
+      document.getElementById('result').textContent = result;
+    }
+  </script>
+</body>
+</html>
